@@ -4,12 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Events</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .finger{
+            background-color: lime;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+        #header{
+            background-color: black;
+            height: 400px;
+        }
+    </style>
 </head>
 <body>
+    <div id="header"></div>
 
     <script>
         document.addEventListener('touchstart', e => {
-            console.log('Start');
+            console.log(e.changedTouches);
+            [...e.changedTouches].forEach(touch => {
+                const barmaq = document.createElement('div');
+                barmaq.classList.add('finger');
+                barmaq.style.top = `${touch.pageY}px`;
+                barmaq.style.left = `${touch.pageX}px`;
+                barmaq.id = touch.identifier;
+                document.body.append(barmaq);
+            })
         })
         document.addEventListener('touchmove', e => {
             console.log('Move');
@@ -17,6 +44,7 @@
         document.addEventListener('touchend', e => {
             console.log('End');
         })
+
     </script>
 </body>
 </html>
