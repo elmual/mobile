@@ -39,10 +39,19 @@
             })
         })
         document.addEventListener('touchmove', e => {
-            console.log('Move');
+            [...e.changedTouches].forEach(touch => {
+                const barmaq = document.getElementById(touch.identifier);
+                barmaq.style.top = `${touch.pageY}px`;
+                barmaq.style.left = `${touch.pageX}px`;
+                
+            })
+            
         })
         document.addEventListener('touchend', e => {
-            console.log('End');
+            [...e.changedTouches].forEach(touch => {
+                const barmaq = document.getElementById(touch.identifier);
+                barmaq.remove();
+            })
         })
 
     </script>
